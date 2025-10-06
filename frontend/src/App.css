@@ -1,9 +1,10 @@
 :root {
-  --primary-color: #4a90e2;
-  --secondary-color: #50e3c2;
-  --background-color: #f4f7f6;
-  --text-color: #333;
-  --card-background: #ffffff;
+  --primary-red: #d92027;
+  --primary-black: #1a1a1a;
+  --primary-white: #ffffff;
+  --light-gray: #f4f4f4;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #333333;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -14,11 +15,9 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
 }
 
 .App {
@@ -26,43 +25,46 @@ body {
 }
 
 .App-header {
-  background: var(--primary-color);
-  padding: 2rem;
+  background: var(--primary-black);
+  padding: 2rem 1rem;
   text-align: center;
-  color: white;
+  color: var(--primary-white);
+  border-bottom: 4px solid var(--primary-red);
 }
 
 .App-header h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .App-header p {
   font-size: 1.1rem;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2.5rem 1rem;
 }
 
 .card {
-  background: var(--card-background);
+  background: var(--primary-white);
   border-radius: 12px;
   padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 24px var(--shadow-color);
-  border: 1px solid #e0e0e0;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  border: 1px solid var(--medium-gray);
 }
 
 .card h2 {
-  color: var(--text-color);
+  color: var(--primary-black);
   margin-bottom: 1.5rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
+  border-bottom: 2px solid var(--light-gray);
+  padding-bottom: 0.75rem;
 }
 
 .button-group {
@@ -74,55 +76,58 @@ body {
 }
 
 .btn {
-  padding: 0.8rem 1.6rem;
+  padding: 0.8rem 1.8rem;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--primary-red);
+  color: var(--primary-white);
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background-color: var(--dark-gray);
+  color: var(--primary-white);
 }
 
 .btn-success {
   background-color: #28a745;
-  color: white;
+  color: var(--primary-white);
 }
 
 .btn-danger {
   background-color: #dc3545;
-  color: white;
+  color: var(--primary-white);
 }
 
 .btn-info {
-  background-color: #17a2b8;
-  color: white;
+  background-color: var(--primary-black);
+  color: var(--primary-white);
   width: 100%;
+  padding: 1rem;
 }
 
 .btn-outline {
   background-color: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: var(--primary-red);
+  border: 2px solid var(--primary-red);
 }
 
 .file-upload-container {
@@ -135,131 +140,135 @@ body {
 }
 
 .audio-player {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: #f9f9f9;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--light-gray);
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
 }
 
 .audio-player p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-weight: 500;
+  color: var(--primary-black);
 }
 
 audio {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .results-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .result-card {
-  background: var(--card-background);
+  background: var(--primary-white);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 16px var(--shadow-color);
-  border-top: 4px solid;
+  border: 1px solid var(--medium-gray);
+  border-top: 5px solid;
 }
 
 .result-card.whisper {
-  border-top-color: var(--primary-color);
+  border-top-color: var(--primary-red);
 }
 
 .result-card.wav2vec2 {
-  border-top-color: var(--secondary-color);
+  border-top-color: var(--primary-black);
 }
 
 .result-card h3 {
-  color: var(--text-color);
+  color: var(--primary-black);
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
 .transcription-text {
-  background: #f8f9fa;
+  background: var(--light-gray);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
-  min-height: 70px;
+  min-height: 80px;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .latency {
   font-weight: 500;
+  text-align: right;
 }
 
 .latency strong {
-  color: var(--primary-color);
+  color: var(--primary-red);
+  font-size: 1.1rem;
 }
 
 .ground-truth-input {
   width: 100%;
-  padding: 0.8rem;
+  padding: 1rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--medium-gray);
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-family: inherit;
 }
 
 .evaluation-results {
-  background: var(--primary-color);
-  color: white;
+  background: var(--primary-black);
+  color: var(--primary-white);
+  text-align: center;
 }
 
 .evaluation-results h2 {
-  color: white;
+  color: var(--primary-white);
 }
 
 .results-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .metric-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--dark-gray);
   padding: 1.5rem;
   border-radius: 12px;
-  text-align: center;
 }
 
 .metric-card h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .metric-value {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
+  color: var(--primary-red);
 }
 
 .metric-detail {
-  font-size: 0.9rem;
+  font-size: 1rem;
+  opacity: 0.8;
 }
 
 .winner {
-  text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--primary-red);
   border-radius: 8px;
   margin-top: 1rem;
 }
 
 .success-message {
-  text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .table-container {
@@ -269,27 +278,37 @@ audio {
 .records-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
 }
 
 .records-table th,
 .records-table td {
-  padding: 0.8rem 1rem;
+  padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.records-table thead {
+  background: var(--primary-black);
+  color: var(--primary-white);
 }
 
 .records-table th {
-  background: #f4f7f6;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
-.records-table tr:last-child td {
-  border-bottom: none;
+.records-table tbody tr:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+.records-table tbody tr:hover {
+  background-color: #ffdddd;
 }
 
 .truncate {
-  max-width: 150px;
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -297,8 +316,8 @@ audio {
 
 .btn-delete {
   background: transparent;
-  color: #dc3545;
-  border: 1px solid #dc3545;
+  color: var(--primary-red);
+  border: 1px solid var(--primary-red);
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
   cursor: pointer;
@@ -306,11 +325,14 @@ audio {
 }
 
 .btn-delete:hover {
-  background: #dc3545;
-  color: white;
+  background: var(--primary-red);
+  color: var(--primary-white);
 }
 
 @media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 2rem;
+  }
   .button-group {
     flex-direction: column;
     align-items: stretch;

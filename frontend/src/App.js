@@ -186,7 +186,7 @@ const submitEvaluation = async () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Speech-to-Text Model Comparison</h1>
+        <h1>VoiSir — From Words You Say to Words You See</h1>
         <p>Compare the performance of Whisper and Wav2Vec2 models</p>
       </header>
 

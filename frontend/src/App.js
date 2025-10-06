@@ -8,6 +8,7 @@ function App() {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [audioURL, setAudioURL] = useState('');
+  const [fileName, setFileName] = useState('');
   const [transcriptions, setTranscriptions] = useState(null);
   const [groundTruth, setGroundTruth] = useState('');
   const [evaluation, setEvaluation] = useState(null);
@@ -55,9 +56,23 @@ const startRecording = async () => {
     setTranscriptions(null);
     setEvaluation(null);
     setGroundTruth('');
+    setFileName('');
   } catch (error) {
     console.error('Error accessing microphone:', error);
     alert('Error accessing microphone. Please check permissions.');
+  }
+};
+
+// Handle file upload
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    setAudioBlob(file);
+    setAudioURL(URL.createObjectURL(file));
+    setFileName(file.name);
+    setTranscriptions(null);
+    setEvaluation(null);
+    setGroundTruth('');
   }
 };
 
@@ -79,10 +94,7 @@ const transcribeAudio = async () => {
   setLoading(true);
   const formData = new FormData();
   
-  // Use appropriate filename extension based on blob type
-  const extension = audioBlob.type.includes('webm') ? 'webm' : 'wav';
-  const filename = `recording_test.${extension}`;
-  
+  const filename = fileName || `recording.${audioBlob.type.split('/')[1]}`;
   formData.append('file', audioBlob, filename);
 
   try {
@@ -168,51 +180,65 @@ const submitEvaluation = async () => {
     setTranscriptions(null);
     setGroundTruth('');
     setEvaluation(null);
+    setFileName('');
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🎙️ Speech-to-Text Model Comparison</h1>
-        <p>Compare Whisper vs Wav2Vec2 models</p>
+        <h1>Speech-to-Text Model Comparison</h1>
+        <p>Compare the performance of Whisper and Wav2Vec2 models</p>
       </header>
 
       <div className="container">
         {/* Recording Section */}
         <div className="card">
-          <h2>📝 Step 1: Record Audio</h2>
+          <h2>Step 1: Provide Audio</h2>
           <div className="button-group">
             <button 
               onClick={startRecording} 
               disabled={isRecording}
               className="btn btn-primary"
             >
-              {isRecording ? '🔴 Recording...' : '🎤 Start Recording'}
+              {isRecording ? 'Recording...' : 'Start Recording'}
             </button>
             <button 
               onClick={stopRecording} 
               disabled={!isRecording}
               className="btn btn-secondary"
             >
-              ⏹️ Stop Recording
+              Stop Recording
             </button>
+            <div className="file-upload-container">
+              <input 
+                type="file" 
+                id="file-upload" 
+                onChange={handleFileUpload} 
+                accept="audio/*" 
+                className="file-input"
+              />
+              <label htmlFor="file-upload" className="btn btn-outline">
+                Upload File
+              </label>
+            </div>
             <button 
               onClick={resetAll} 
               className="btn btn-danger"
             >
-              🔄 Reset
+              Reset
             </button>
           </div>
 
           {audioURL && (
             <div className="audio-player">
+              <p>{fileName || 'Recorded Audio'}</p>
               <audio controls src={audioURL}></audio>
               <button 
                 onClick={transcribeAudio} 
-                disabled={loading}
+                disabled={loading || !audioBlob}
                 className="btn btn-success"
               >
-                {loading ? '⏳ Transcribing...' : '🚀 Transcribe Audio'}
+                {loading ? 'Transcribing...' : 'Transcribe Audio'}
               </button>
             </div>
           )}
@@ -223,29 +249,29 @@ const submitEvaluation = async () => {
           <>
             <div className="results-container">
               <div className="result-card whisper">
-                <h3>🤖 Whisper Model</h3>
+                <h3>Whisper Model</h3>
                 <div className="transcription-text">
                   {transcriptions.whisper_output}
                 </div>
                 <div className="latency">
-                  ⏱️ Latency: <strong>{transcriptions.whisper_latency}s</strong>
+                  Latency: <strong>{transcriptions.whisper_latency}s</strong>
                 </div>
               </div>
 
               <div className="result-card wav2vec2">
-                <h3>🤖 Wav2Vec2 Model</h3>
+                <h3>Wav2Vec2 Model</h3>
                 <div className="transcription-text">
                   {transcriptions.wav2vec2_output}
                 </div>
                 <div className="latency">
-                  ⏱️ Latency: <strong>{transcriptions.wav2vec2_latency}s</strong>
+                  Latency: <strong>{transcriptions.wav2vec2_latency}s</strong>
                 </div>
               </div>
             </div>
 
             {/* Ground Truth Input */}
             <div className="card">
-              <h2>✅ Step 2: Enter Correct Transcription</h2>
+              <h2>Step 2: Enter Correct Transcription</h2>
               <textarea
                 value={groundTruth}
                 onChange={(e) => setGroundTruth(e.target.value)}
@@ -258,7 +284,7 @@ const submitEvaluation = async () => {
                 disabled={loading || !groundTruth.trim()}
                 className="btn btn-success"
               >
-                {loading ? '⏳ Evaluating...' : '📊 Evaluate Models'}
+                {loading ? 'Evaluating...' : 'Evaluate Models'}
               </button>
             </div>
           </>
@@ -267,7 +293,7 @@ const submitEvaluation = async () => {
         {/* Evaluation Results */}
         {evaluation && (
           <div className="card evaluation-results">
-            <h2>📊 Evaluation Results</h2>
+            <h2>Evaluation Results</h2>
             <div className="results-grid">
               <div className="metric-card">
                 <h4>Whisper Accuracy</h4>
@@ -282,26 +308,26 @@ const submitEvaluation = async () => {
             </div>
             <div className="winner">
               {evaluation.whisper_accuracy > evaluation.wav2vec2_accuracy 
-                ? '🏆 Whisper wins!' 
+                ? 'Whisper wins!' 
                 : evaluation.wav2vec2_accuracy > evaluation.whisper_accuracy
-                ? '🏆 Wav2Vec2 wins!'
-                : '🤝 It\'s a tie!'}
+                ? 'Wav2Vec2 wins!'
+                : 'It\'s a tie!'}
             </div>
-            <div className="success-message">✅ {evaluation.message}</div>
+            <div className="success-message">{evaluation.message}</div>
           </div>
         )}
 
         {/* View Records Button */}
         <div className="card">
           <button onClick={fetchRecords} className="btn btn-info">
-            📋 View All Records
+            View All Records
           </button>
         </div>
 
         {/* Records Table */}
         {showRecords && records.length > 0 && (
           <div className="card">
-            <h2>📋 Transcription History</h2>
+            <h2>Transcription History</h2>
             <div className="table-container">
               <table className="records-table">
                 <thead>
@@ -331,7 +357,7 @@ const submitEvaluation = async () => {
                           onClick={() => deleteRecord(record.id)}
                           className="btn-delete"
                         >
-                          🗑️
+                          Delete
                         </button>
                       </td>
                     </tr>

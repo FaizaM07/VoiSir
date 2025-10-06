@@ -1,0 +1,13 @@
+fastapi[standard]
+uvicorn[standard]
+python-multipart
+sqlalchemy
+pydantic
+transformers
+torch
+torchaudio
+openai-whisper
+jiwer
+librosa
+soundfile
+numpy

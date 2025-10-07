@@ -3,3 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+### Added
+- Add file input
+- Test Real Time input
+
+### Changed
+- Change UI
+
+### Fixed
+- Fix UI issues
+- Fix Backend

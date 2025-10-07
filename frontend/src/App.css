@@ -1,5 +1,5 @@
 :root {
-  --primary-red: #d92027;
+  --primary-red: #c00e14;
   --primary-black: #1a1a1a;
   --primary-white: #ffffff;
   --light-gray: #f4f4f4;
@@ -22,6 +22,9 @@ body {
 
 .App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-header {
@@ -30,6 +33,7 @@ body {
   text-align: center;
   color: var(--primary-white);
   border-bottom: 4px solid var(--primary-red);
+  width: 100%;
 }
 
 .App-header h1 {
@@ -45,13 +49,14 @@ body {
 
 .container {
   max-width: 1100px;
+  width: 110%; /* Ensure container takes full width up to max-width */
   margin: 0 auto;
   padding: 2.5rem 1rem;
 }
 
 .card {
   background: var(--primary-white);
-  border-radius: 12px;
+  border-radius: 0; /* No round shape */
   padding: 2rem;
   margin-bottom: 2.5rem;
   box-shadow: 0 10px 30px var(--shadow-color);
@@ -166,7 +171,7 @@ audio {
 
 .result-card {
   background: var(--primary-white);
-  border-radius: 12px;
+  border-radius: 0; /* No round shape */
   padding: 1.5rem;
   border: 1px solid var(--medium-gray);
   border-top: 5px solid;
@@ -237,7 +242,7 @@ audio {
 .metric-card {
   background: var(--dark-gray);
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: 0; /* No round shape */
 }
 
 .metric-card h4 {

@@ -48,7 +48,7 @@ body {
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1020px;  
   width: 110%; /* Ensure container takes full width up to max-width */
   margin: 0 auto;
   padding: 2.5rem 1rem;

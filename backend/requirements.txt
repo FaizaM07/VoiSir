@@ -11,3 +11,4 @@ jiwer
 librosa
 soundfile
 numpy
+nemo_toolkit[all]
